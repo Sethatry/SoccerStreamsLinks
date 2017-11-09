@@ -11,8 +11,9 @@ subreddit = reddit.subreddit('soccerstreams')
 def choose_stream():
     submission_list = []
     for submission in subreddit.new(limit=10):
-        print(submission.title)
-        submission_list.append(submission)
+        if 'vs' in submission.title or 'GMT' in submission.title:
+            print(submission.title)
+            submission_list.append(submission)
     team = input('Choose Team: ')                       # You can change the values of  team,quality variables
     quality = input('Choose Quality(720 or 520): ')     # to always use the same team and quality, for example make
     return team, quality, submission_list             # team = 'Barcelona' and quality = '720'
@@ -20,6 +21,9 @@ def choose_stream():
 
 def get_stream_link():
     team, quality, submission_list = choose_stream()
+
+    if not submission_list:
+        return 'No Streams Available Right Now'
     for submission in submission_list:
         if team in submission.title:
             print('Team Found')
