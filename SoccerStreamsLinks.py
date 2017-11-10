@@ -53,9 +53,12 @@ def get_stream_link():
                         start_link = comment.index('http')
                         end_link = comment.find(')', start_link)
                         return comment[start_link:end_link]
-            print('Quality Not Available, here is full Comment: ')
-            for top_level_comment in submission.comments:   # Using the for loop to get back to first comment
-                return top_level_comment.body         # had I skipped the for loop line it would return the last comment
+            print('Quality Not Available, here is full link: ')
+                        for top_level_comment in submission.comments:    # Using the for loop to get back to first comment, had I
+                start_link = top_level_comment.body.index('http')        #skipped the for loop line it would return the
+                end_link   = top_level_comment.body.find(')',start_link) #last comment
+                return top_level_comment.body[start_link:end_link]
+
 
 
 print(get_stream_link())
